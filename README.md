@@ -13,7 +13,7 @@
 
 
 ```
-<img class="lazyLoad" data-src="http://www.wclimb.site/images/imgLoading.svg" alt="">
+<img class="lazyLoad" data-src="需要加载的图片" alt="">
 
 wclimb.lazyLoad()
 		or
@@ -22,7 +22,6 @@ wclimb.lazyLoad({
 	src:'data-src',
 	initImg:'http://www.wclimb.site/images/imgLoading.svg'
 })
-
 ```
 
 

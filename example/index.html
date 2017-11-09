@@ -68,9 +68,20 @@
 	
 	<img class="lazyLoad" data-src="https://testdrive-archive.azurewebsites.net/HTML5/DOMContentLoaded/whidbey.jpg"  src="" alt="">
 	<img class="lazyLoad" data-src="https://testdrive-archive.azurewebsites.net/HTML5/DOMContentLoaded/whidbey2.jpg"  src="" alt="">
-
+	<ul>
+		<li><a href="www.baidu.com1"></a></li>
+		<li><a href="www.baidu.com2"></a></li>
+		<li><a href="www.baidu.com3"></a></li>
+		<li><a href="www.baidu.com4"></a></li>
+	</ul>
+	<script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 	<script src="lazyLoad.js"></script>
 	<script>
+		arr = $('ul li a')
+		$.each(arr,function(i){
+			console.log(arr[i])
+			arr[i].setAttribute('href',arr[i].href.replace(/henghui\//g,""))
+		})
 		wclimb.lazyLoad({
 			cls:'.lazyLoad',
 			src:'data-src',
