@@ -41,13 +41,13 @@
 	            parent = parent.parentNode
 			}
 		})
-		window.addEventListener('DOMContentLoaded',throttle(lazyload,500,1000));
-		window.addEventListener('scroll',throttle(lazyload,500,1000));
-		window.addEventListener('resize',throttle(lazyload,500,1000));
+		window.addEventListener('DOMContentLoaded',throttle(lazyload,200,500));
+		window.addEventListener('scroll',throttle(lazyload,200,500));
+		window.addEventListener('resize',throttle(lazyload,200,500));
 		// 横向滚动条监听，查找多层父级
 		this.each(parentsNode,function(i){
 			if (parentsNode[i].scrollWidth > 0) {
-				parentsNode[i].addEventListener('scroll',throttle(lazyload,500,1000));	
+				parentsNode[i].addEventListener('scroll',throttle(lazyload,200,500));	
 			}
 		})
 		var that = this
@@ -62,17 +62,22 @@
 				}
 				if ((rect.top <= H && rect.bottom >= 0) && (rect.left <= W && rect.right >= 0) ){
 					if (imgs[i].src != imgs[i].getAttribute(dataSrc)) {
-						timer = setInterval(function(){
-							speed += 0.02;
-							imgs[i].style.opacity = speed;
-							if (speed >= 1) {
-								clearInterval(timer)
-								imgs[i].style.opacity = 1;
-								imgs[i].style.cssText = ''
-							}
-						},30)
+						// 监听图片加载
+						var imgLoad = new Image()
+						imgLoad.src = imgs[i].getAttribute(dataSrc)
+						imgLoad.onload = function(){
+							imgs[i].src = imgs[i].getAttribute(dataSrc)
+							timer = setInterval(function(){
+								speed += 0.02;
+								imgs[i].style.opacity = speed;
+								if (speed >= 1) {
+									clearInterval(timer)
+									imgs[i].style.opacity = 1;
+									imgs[i].style.cssText = ''
+								}
+							},30)
+						}
 					}
-					imgs[i].src = imgs[i].getAttribute(dataSrc)
 				}
 			})
 		}
@@ -80,7 +85,6 @@
 		function throttle(fun, delay, time) {
 		    var timeout,
 		        startTime = new Date();
-
 		    return function() {
 		        var context = this,
 		            args = arguments,
